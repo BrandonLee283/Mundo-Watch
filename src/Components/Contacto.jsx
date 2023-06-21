@@ -1,8 +1,24 @@
 import React from 'react';
 import '../Styles/style.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useRef } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
+
 function Contacto() {
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_h6yu2sm', 'template_3mc0xmn', form.current, 'bK1Bg8yRxKN1BqIA5')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    };
+
   return (
     <>
       <header>
@@ -39,7 +55,7 @@ function Contacto() {
       </header>
 
       <div className="container-contacto">
-        <form action="#" id="form" method="POST">
+        <form action="#" ref={form} onSubmit={sendEmail}>
           <h2>CONTACTO</h2>
           <br />
           <input type="text" name="cliente" id="nombre" placeholder="Ingrese su Nombre" onKeyPress={event => event.charCode === 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)} onPaste={event => event.preventDefault()} required />
