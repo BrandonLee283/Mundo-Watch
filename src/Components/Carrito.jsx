@@ -5,27 +5,27 @@ import { useNavigate, useRef } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 function Carrito() {
 
-    const form = useRef();
+  const form = useRef();
 
-    const sendEmail = (e) => {
-        e.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-        emailjs.sendForm('service_h6yu2sm', 'template_4xufr69', form.current, 'bK1Bg8yRxKN1BqIA5')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
-    };
+    emailjs.sendForm('service_h6yu2sm', 'template_4xufr69', form.current, 'bK1Bg8yRxKN1BqIA5')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+  };
   return (
     <>
       <header>
         <div className="menu logo-nav">
-          <a href="index.html" className="logo">PETSHOP</a>
+          <a href="index.html" className="logo">Mundo watch</a>
           <label className="menu-icon"><span className="fas fa-bars icomin"></span></label>
           <nav className="navigation">
             <ul>
-            <li>
+              <li>
                 <NavLink to="/nosotros" activeClassName="active">Nosotros</NavLink>
               </li>
               <li>
@@ -110,15 +110,21 @@ function Carrito() {
             <div className="row-footer">
               <div className="col-xl-6 col-lg-6 text-center text-lg-left">
                 <div className="copyright-text">
-                  <p>Copyright &copy; 2020, todos los derechos reservados <a href="index.html">PETSHOP</a></p>
+                  <p>Copyright &copy; 2020, todos los derechos reservados <a href="index.html">Mundo Watch</a></p>
                 </div>
               </div>
               <div className="col-xl-6 col-lg-6 d-none d-lg-block text-right">
                 <div className="footer-menu">
                   <ul>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
+                    <li>
+                      <NavLink to="/nosotros" activeClassName="active">Nosotros</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/productos" activeClassName="active">Productos</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/contacto" activeClassName="active">Contacto</NavLink>
+                    </li>
                   </ul>
                 </div>
               </div>
