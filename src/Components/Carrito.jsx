@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Carrito() {
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_h6yu2sm', 'template_4xufr69', form.current, 'bK1Bg8yRxKN1BqIA5')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    };
   return (
     <>
       <header>
@@ -30,7 +44,7 @@ function Carrito() {
       <main>
         <div className="container-carrito">
           <h2>Realizar Compra</h2>
-          <form id="procesar-pago" action="#" method="POST">
+          <form id="procesar-pago" ref={form} onSubmit={sendEmail}>
             <div className="contenido titulo">
               <label htmlFor="cliente" className="">Cliente :</label>
               <input type="text" className="form-control" id="cliente" name="cliente" placeholder="Ingrese su nombre" onKeyPress={event => event.charCode === 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)} onPaste={event => event.preventDefault()} required />
@@ -77,7 +91,7 @@ function Carrito() {
             </div>
             <div className="botones-envio">
               <a href="productos.html" className="button" id="volver">Seguir comprando</a>
-              <input type="submit" className="button" id="procesar-compra" onClick={event => validarCorreo(event.target.form.correo.value)} value="Realizar compra" />
+              <input type="submit" className="button" id="procesar-compra" value="Realizar compra" />
             </div>
           </form>
         </div>
