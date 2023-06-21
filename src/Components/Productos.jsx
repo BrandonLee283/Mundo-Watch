@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function Productos() {
   const [productos, setProductos] = useState([]);
   const [carrito, setCarrito] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch('http://localhost:3001/productos')
       .then(response => {
@@ -59,6 +59,18 @@ function Productos() {
     const nuevoCarrito = carrito.filter(producto => producto.id_producto !== idProducto);
     setCarrito(nuevoCarrito);
   };
+  const vaciarCarrito = () => {
+    setCarrito([]);
+  };
+  
+
+
+  const procesarCompra = () => {
+    // const productosSeleccionados = carrito;
+    // console.log(productosSeleccionados);
+    navigate('/carrito', { state: { arrayData: carrito } });
+
+  };
   return (
     <>
       <header>
@@ -111,8 +123,8 @@ function Productos() {
                     </tbody>
                   </table>
 
-                  <a href="#" id="vaciar-carrito" className="button-vaciar">Vaciar Carrito</a>
-                  <a href="#" id="procesar-pedido" className="button-pedido">Procesar Compra</a>
+                  <a id="vaciar-carrito"onClick={vaciarCarrito} className="button-vaciar">Vaciar Carrito</a>
+                  <a id="procesar-pedido" className="button-pedido" onClick={procesarCompra}>Procesar Compra</a>
                 </div>
               </li>
             </ul>

@@ -1,11 +1,32 @@
 import emailjs from '@emailjs/browser';
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react'
 import '../Styles/style.css'
-import { useNavigate, useRef } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-function Carrito() {
 
+function Carrito() {
+  const navigate = useNavigate()
   const form = useRef();
+  const location = useLocation();
+  const arrayData = location.state?.arrayData || [];
+  const [estados, setEstados] = useState([]);
+  const [estado, setEstado] = useState("");
+
+  console.log(arrayData);
+  var sumaTotal = 0
+
+  useEffect(() => {
+    fetch('http://localhost:3001/estados')
+      .then(response => response.json())
+      .then(data => {
+        setEstados(data)
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error al obtener las estados:', error);
+      });
+
+  }, [])
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -52,7 +73,7 @@ function Carrito() {
       <main>
         <div className="container-carrito">
           <h2>Realizar Compra</h2>
-          <form id="procesar-pago" ref={form} onSubmit={sendEmail}>
+          <form ref={form} onSubmit={sendEmail}>
             <div className="contenido titulo">
               <label htmlFor="cliente" className="">Cliente :</label>
               <input type="text" className="form-control" id="cliente" name="cliente" placeholder="Ingrese su nombre" onKeyPress={event => event.charCode === 32 || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)} onPaste={event => event.preventDefault()} required />
@@ -61,44 +82,36 @@ function Carrito() {
               <label htmlFor="email" className="">Correo :</label>
               <input type="email" className="form-control" id="correo" name="correo" placeholder="Ingrese su correo" required />
             </div>
-            <div id="carrito" className="contenido">
-              <table className="tabla" id="lista-compra">
-                <thead>
-                  <tr>
-                    <th scope="col">Imagen</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Sub Total</th>
-                    <th scope="col">Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-                <tr>
-                  <th colSpan="4" scope="col" className="">SUB TOTAL :</th>
-                  <th scope="col">
-                    <p id="subtotal"></p>
-                  </th>
-                </tr>
-                <tr>
-                  <th colSpan="4" scope="col" className="">IGV :</th>
-                  <th scope="col">
-                    <p id="igv"></p>
-                  </th>
-                </tr>
-                <tr>
-                  <th colSpan="4" scope="col" className="">TOTAL :</th>
-                  <th scope="col">
-                    <input type="text" id="total" name="monto_total" readOnly />
-                  </th>
-                </tr>
-              </table>
-            </div>
+
+
+            <textarea
+
+              name="message"
+              cols="40"
+              rows="5"
+              value={arrayData
+                .map(
+                  (producto) =>
+                    `${producto.cantidad} ${producto.nombre_producto} $${producto.precio_producto} c/u`
+                )
+                .join('\n')}
+              readOnly
+              required />
+
             <div className="" id="loaders">
               <img id="cargando" src="assets/img/cargando.gif" width="220" alt="Cargando" />
             </div>
+            <select name="state" className='Estados' onChange={(e) => setEstado(e.target.value)}>
+              <option >Seleccione un municipio de algun estado</option>
+              {estados.map((estado) => {
+                return (
+                  <option key={estado.id_estado} value={estado.municipio}>{estado.municipio}</option>
+                )
+              })}
+
+            </select>
             <div className="botones-envio">
-              <a href="productos.html" className="button" id="volver">Seguir comprando</a>
+              <a onClick={() => navigate('/')} className="button" id="volver">Seguir comprando</a>
               <input type="submit" className="button" id="procesar-compra" value="Realizar compra" />
             </div>
           </form>
