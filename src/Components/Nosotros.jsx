@@ -43,16 +43,15 @@ function Nosotros() {
           <div className="columna1">
             <h2>Nosotros</h2>
             <p>
-              Mundo Watch es una tienda virtual, aquí te vas a encontrar muchísima variedad de productos para tu mascota.
+              Mundo Watch es una tienda virtual, aquí te vas a encontrar gran variedad de estilos de relojes.
             </p>
             <br />
             <p>
-              Hemos tenido siempre como prioridad ofrecer productos variados y de calidad para nuestras mascotas, a precios accesibles y acompañado por un servicio al cliente de primera.
+            Trabajamos con marcas reconocidas y sometemos cada reloj a rigurosos estándares de calidad para asegurarnos de su precisión y durabilidad.
             </p>
             <br />
             <p>
-              La creación de una comunidad de clientes leales ha ayudado a Pet Shop a crecer y convertirse en la empresa que somos ahora. No solo somos una tienda virtual, nuestra empresa y todo nuestro equipo nos preocupamos y apoyamos a asociaciones, albergues y fomentamos la tenencia responsable de mascotas.
-            </p>
+            En Mundo Watch, nos enorgullece brindar una experiencia de compra excepcional y un servicio al cliente de primer nivel. Nos esforzamos por superar tus expectativas en cada interacción y asegurarnos de tu satisfacción en cada paso del proceso.            </p>
             <br />
           </div>
           <div className="columna2">
