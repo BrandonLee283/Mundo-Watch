@@ -20,12 +20,12 @@ function Nosotros() {
               <li>
                 <NavLink to="/contacto" activeClassName="active">Contacto</NavLink>
               </li>
-              <li className="search-icon">
+              {/* <li className="search-icon">
                 <input type="search" placeholder="Search" />
                 <label className="icon">
                   <span className="fas fa-search"></span>
                 </label>
-              </li>
+              </li> */}
               <li className="car">
                 <a href="carrito.html">
                   <svg className="bi bi-cart3" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
