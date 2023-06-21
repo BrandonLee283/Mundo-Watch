@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-
+import React from 'react';
+import '../Styles/style.css'
+import { useNavigate, useRef } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 function Carrito() {
 
     const form = useRef();
@@ -23,9 +25,15 @@ function Carrito() {
           <label className="menu-icon"><span className="fas fa-bars icomin"></span></label>
           <nav className="navigation">
             <ul>
-              <li><a href="nosotros.html">Nosotros</a></li>
-              <li><a href="productos.html">Productos</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
+            <li>
+                <NavLink to="/nosotros" activeClassName="active">Nosotros</NavLink>
+              </li>
+              <li>
+                <NavLink to="/productos" activeClassName="active">Productos</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contacto" activeClassName="active">Contacto</NavLink>
+              </li>
               <li className="search-icon">
                 <input type="search" placeholder="Search" />
                 <label className="icon">
